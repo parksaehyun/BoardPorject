@@ -1,0 +1,29 @@
+spring:
+  #JPA 설정(ORM, 쿼리를 알아서 만들어 준다)
+  jpa:
+    hibernate:
+      ddlAuto: create
+        # 테이블생성, 제약조건 자동으로
+        # -> 테이블 만들 필요x, 클래스에 정의만 해도 정의를 바탕으로 테이블 생성해줌
+        # 테이블간 조인, fk 등등
+
+  #라이브리로드 설정 - 배포시엔 배제해야함, 개발할 때만 사용, 배포시에 사용하면 서버가 매우 부담스러워 함
+  devtools:
+    livereload:
+      enabled: false
+
+  # 정적 자원 설정(css, js, 이미지) - 코드를 바꾸었을 때 정적자원 변경된거 변경반영
+  web:
+    resources:
+      static-locations: classpath:/static/ # 배포할때는 클래스패스로 해야 인식함
+
+  # 타임리프 설정
+  thymeleaf:
+    cache: true # 한번만 번역하고 캐시의 이점 사용
+    prefic: classpath:/templates/
+
+  # 파일 업로드 경로 설정
+  file:
+    upload:
+      path: /home/ubuntu/uploads
+      url: /upload/

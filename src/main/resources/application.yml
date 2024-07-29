@@ -1,0 +1,69 @@
+server:
+  port: 3000
+
+# 데이터베이스 설정
+spring:
+  # 데이터베이스_데이터소스 설정
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    # = driverClassName // 보통프로퍼티즈파일은 - 를 사용해야 함
+    url: jdbc:oracle:thin:@${db.host}:${db.port}:XE
+    # db가 oracle이 아닐수도 있고 서버가 다를 수 있으니 이것도 바뀔 수 있는 부분이라 설정해주어야 함
+    # 사실 이거는 환경변수로 설정할 수 있음 벗 연습할 때 헷갈릴까봐 이렇게함
+    # 포트번호 보여주면 해킹의 위험이 있으니 환경변수 통해서 설정하도록 @${db.host}:${db.port} 사용함
+    username : ${db.username}
+    password: ${db.password}
+    # 환경변수
+    # username, password는 절대 드러나면 안됨(깃헙 등등)
+
+  #JPA 설정(ORM, 쿼리를 알아서 만들어 준다)
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        # sql이 보여야 개발하기 편함 -> 실행하는 sql을 콘솔에 출력
+        format_sql: true
+        # 실행되는 sql의 들여쓰기 및 줄 개행
+        use_sql_comments: true
+        # 자동생성해주는 쿼리에대한 주석
+        default_batch_fetch_size: 100
+
+      #dialect: org.hibernat.dialect.OracleDialect
+      # 플랫폼에 맞게 쿼리를 생성해주어야 함
+      # 방언: 그 지역만 쓰는 특별한 언어
+      # db쿼리를 오라클에 맞게 해줌
+      # 옛날버전은 이거 지정해주어야 하지만 요즘거는 안해도 드라이버보고 알아서 함
+    hibernate:
+      ddlAuto: create
+      # 테이블생성, 제약조건 자동으로
+      # -> 테이블 만들 필요x, 클래스에 정의만 해도 정의를 바탕으로 테이블 생성해줌
+      # 테이블간 조인, fk 등등
+
+  #라이브리로드 설정 - 배포시엔 배제해야함, 개발할 때만 사용, 배포시에 사용하면 서버가 매우 부담스러워 함
+  devtools:
+    livereload:
+      enabled: true
+
+  # 정적 자원 설정(css, js, 이미지) - 코드를 바꾸었을 때 정적자원 변경된거 변경반영
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
+
+  # 파일 업로드 용량 설정(이미 내부적으로 설정이 들어가 있음)
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 60MB
+      file-size-threshold: 30MB
+
+  # 파일 업로드 경로 설정
+  file:
+    upload:
+      path: D:/uploads
+      url: /upload/ #정적 경로 설정
+
+# 로거 설정(로거는 기본 탑재되어 있음)
+logging:
+  level:
+    org.hibernate.type: trace
+    org.hibernate.orm.jdbc.bind: trace

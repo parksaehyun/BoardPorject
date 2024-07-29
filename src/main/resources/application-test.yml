@@ -1,0 +1,14 @@
+# 데이터베이스 설정
+spring:
+  # 데이터베이스_데이터소스 설정
+  datasource:
+    driver-class-name: org.h2.Driver
+    # = driverClassName // 보통프로퍼티즈파일은 - 를 사용해야 함
+    url: jdbc:h2:mem:test
+    # db가 oracle이 아닐수도 있고 서버가 다를 수 있으니 이것도 바뀔 수 있는 부분이라 설정해주어야 함
+    # 사실 이거는 환경변수로 설정할 수 있음 벗 연습할 때 헷갈릴까봐 이렇게함
+    # 포트번호 보여주면 해킹의 위험이 있으니 환경변수 통해서 설정하도록 @${db.host}:${db.port} 사용함
+    username : sa
+    password:
+    # 환경변수
+    # username, password는 절대 드러나면 안됨(깃헙 등등)

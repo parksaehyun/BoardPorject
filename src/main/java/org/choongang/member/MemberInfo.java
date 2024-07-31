@@ -19,17 +19,17 @@ public class MemberInfo implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 권한 설정
+        // 권한 설정 -> 인가(접근 통제)를 위해 필요
         return authorities;
     }
 
     @Override
-    public String getPassword() {
+    public String getPassword() { // 인증에 필요
         return password;
     }
 
     @Override
-    public String getUsername() {
+    public String getUsername() { // 인증에 필요
         return email;
     }
 
@@ -50,6 +50,7 @@ public class MemberInfo implements UserDetails {
         // 비번이 만료되었는가
         // 비번만료 시 초기화할 수 있는 페이지로 이동할 수 있게 하면 됨
         return true;
+        //return false;
     }
 
     @Override

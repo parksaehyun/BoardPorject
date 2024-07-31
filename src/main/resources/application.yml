@@ -34,7 +34,8 @@ spring:
       # db쿼리를 오라클에 맞게 해줌
       # 옛날버전은 이거 지정해주어야 하지만 요즘거는 안해도 드라이버보고 알아서 함
     hibernate:
-      ddlAuto: create
+      #ddlAuto: create
+      ddlAuto: update
       # 테이블생성, 제약조건 자동으로
       # -> 테이블 만들 필요x, 클래스에 정의만 해도 정의를 바탕으로 테이블 생성해줌
       # 테이블간 조인, fk 등등

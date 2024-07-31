@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Getter @Setter
-@MappedSuperclass
+@MappedSuperclass // 공통속성화 클래스이다 알려주는 애노테이션
 @EntityListeners(AuditingEntityListener.class) // 이벤트 리스너 : 변화 감지 -> 변화감지를 위해 계속 돌아가기 때문에 자원소비가됨 -> @EnableJpaAuditing 설정클래스에 넣어주기
 public abstract class BaseEntity {
     //abstract : 추상클래스 애를 상속받으면 멤버변수 데이터 다들 공유 가능 = 공통 속성화

@@ -59,8 +59,9 @@ public class MemberSaveService { // 회원가입 + 회원정보 수정해주는 
 
         memberRepository.saveAndFlush(member);
         // 권한 추가, 수정 S
+        // 수정의 경우 바뀐 권한을 찾아서 update를 해주는 것 보단 권한을 비우고 새로 저장하는게 더 간편
         if (authorities != null) {
-            List<Authorities> items = authoritiesRepository.findByMember(member);
+            List<Authorities> items = authoritiesRepository.findByMember(member); // 회원정보를 가지고 권한 가져오기
             authoritiesRepository.deleteAll(items);
             authoritiesRepository.flush();
 

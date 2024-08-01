@@ -3,28 +3,23 @@ package org.choongang.member.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.choongang.board.entities.Board;
 import org.choongang.board.repositories.BoardRepository;
-import org.choongang.member.MemberInfo;
+import org.choongang.global.exceptions.ExceptionProcessor;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.services.MemberSaveService;
 import org.choongang.member.validators.JoinValidator;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @Slf4j
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
 @SessionAttributes("requestLogin")
-public class MemberController {
+public class MemberController implements ExceptionProcessor {
 
     private final JoinValidator joinValidator;
     private final MemberSaveService memberSaveService;
@@ -71,6 +66,21 @@ public class MemberController {
         return "front/member/login"; // pc뷰
     }
 
+    @ResponseBody
+    @GetMapping("/test1")
+    @PreAuthorize("isAuthenticated()")
+    public void test1() {
+        log.info("test1 - 회원만 접근 가능");
+    }
+
+    @ResponseBody
+    @GetMapping("/test2")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public void test2() {
+        log.info("test2 - 관리자만 접근 가능");
+    }
+
+    /*
     // 로그인한 회원의 정보 가져오기
 
     @ResponseBody
@@ -100,7 +110,8 @@ public class MemberController {
             log.info("getPrincipal(): {}", authentication.getPrincipal());
         }
     }
-
+     */
+    /*
     @ResponseBody
     @GetMapping("/test4")
     public void test4() {
@@ -108,20 +119,24 @@ public class MemberController {
         log.info("로그인 회원: {}", memberUtil.getMember());
     }
 
-    @ResponseBody
-    @GetMapping("/test5")
-    public void test5() {
-        /*
-        Board board = Board.builder()
-                .bId("freetalk")
-                .bName("자유게시판")
-                .build();
-
-        boardRepository.saveAndFlush(board);
-
-         */
-        Board board = boardRepository.findById("freetalk").orElse(null);
-        board.setBName("(수정)자유게시판");
-        boardRepository.saveAndFlush(board);
-    }
+     */
+//    /*
+//    @ResponseBody
+//    @GetMapping("/test5")
+//    public void test5() {
+//
+//        Board board = Board.builder()
+//                .bId("freetalk")
+//                .bName("자유게시판")
+//                .build();
+//
+//        boardRepository.saveAndFlush(board);
+//
+//        /*
+//        Board board = boardRepository.findById("freetalk").orElse(null);
+//        board.setBName("(수정)자유게시판");
+//        boardRepository.saveAndFlush(board);
+//         */
+//
+//    */
 }

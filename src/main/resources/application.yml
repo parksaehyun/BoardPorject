@@ -58,10 +58,10 @@ spring:
       file-size-threshold: 30MB
 
   # 파일 업로드 경로 설정
-  file:
-    upload:
-      path: D:/uploads
-      url: /upload/ #정적 경로 설정
+file:
+  upload:
+    path: D:/uploads
+    url: /upload/ #정적 경로 설정
 
 # 로거 설정(로거는 기본 탑재되어 있음)
 logging:

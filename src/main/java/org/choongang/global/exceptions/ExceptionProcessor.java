@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface ExceptionProcessor {
-    // 일반 컨트롤러 처리
+    // ✨일반 컨트롤러 처리
 
     @ExceptionHandler(Exception.class)
     default ModelAndView errorHandler(Exception e, HttpServletRequest request) {

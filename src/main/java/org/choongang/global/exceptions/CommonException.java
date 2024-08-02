@@ -11,6 +11,7 @@ import java.util.Map;
 public class CommonException extends RuntimeException {
     // CommonException : 모든예외는 여기로 유입되서 분기됨
 
+    private boolean errorCode;
     private HttpStatus status;
     private Map<String, List<String>> errorMessages;
 

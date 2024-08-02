@@ -31,7 +31,7 @@ public class MemberUtil {
     // 회원 정보 가져오기
     public Member getMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo) {
+        if (authentication != null && authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo) {
             MemberInfo memberInfo = (MemberInfo) authentication.getPrincipal();
 
             return memberInfo.getMember();

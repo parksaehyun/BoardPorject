@@ -47,7 +47,7 @@ public class SecurityConfig {
             */
             c.requestMatchers("/mypage/**").authenticated() // 회원 전용
                     .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                    .anyRequest().permitAll();
+                    .anyRequest().permitAll(); // anyRequest() : 모든페이지, permitAll() : 다 허용
 
 
         });

@@ -134,9 +134,9 @@ public class MemberController implements ExceptionProcessor {
 //        boardRepository.saveAndFlush(board);
 //
 //        /*
-//        Board board = boardRepository.findById("freetalk").orElse(null);
-//        board.setBName("(수정)자유게시판");
-//        boardRepository.saveAndFlush(board);
+//        Board board = boardRepository.findById("freetalk").orElse(null); // 가져온 상태 = 영속성안에 있는 상태, 조회 = 영속성콘텍스트안에 있는것을 조회
+//        board.setBName("(수정)자유게시판"); // 영속성 콘텍스트안에 있는 엔티티를 수정하면 -> save시 insert가 아닌 update쿼리를 수행
+//        boardRepository.saveAndFlush(board); // 값 저장이 아님!!!, 값 수정
 //         */
 //
 //    */

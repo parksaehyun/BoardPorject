@@ -23,7 +23,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         /* 로그인, 로그아웃 S */
         http.formLogin(f -> {
-            f.loginPage("/member/login")
+            f.loginPage("/member/login") // login url이 무엇인지 알려주기
                 .usernameParameter("email") // form에서 name이 뭔지 알려주기
                 .passwordParameter("password") // form에서 name이 뭔지 알려주기
                 //. successForwardUrl("/")// 성공시 이동할 경로 -> 이렇게는 잘 안함
@@ -33,8 +33,8 @@ public class SecurityConfig {
         });
 
         http.logout(f -> {
-            f.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-                .logoutSuccessUrl("/member/login");
+            f.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout")) // logout url이 무엇인지
+                .logoutSuccessUrl("/member/login"); // logout 후 이동할 경로
         });
         /* 로그인, 로그아웃 E */
 

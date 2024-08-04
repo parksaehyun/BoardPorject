@@ -99,7 +99,8 @@ public class MemberController implements ExceptionProcessor {
     @GetMapping("/test3")
     public void test3() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+        // getContext() : SecurityContextHolder객체를 가져오기
+        // getAuthentication() : LoginSuccessHandler의 3번째 매개변수, 로그인 정보
 
         log.info("로그인 상태: {}", authentication.isAuthenticated());
         if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof MemberInfo) { // 로그인 상태 - UserDetails 구현체(getPrincipal())

@@ -21,9 +21,12 @@ public class FileController implements RestExceptionProcessor {
 
     private final FileUploadService uploadService;
 
-    @PostMapping("/upload") // @RequestPart : 어떤 필드(form의 name값)에서 넘어오는지 알려주기 = 라이크 @RequestParam
+    // 파일업로드는  post형태로만 넘어옴
+    @PostMapping("/upload")
     public ResponseEntity<JSONData> upload(@RequestPart("file") MultipartFile[] files, @RequestParam(name = "gid", required = false) String gid, @RequestParam(name = "location", required = false) String location) {
-
+        // MultipartFile[] files : 넘어온 파일데이터가 담기는 곳, 파일은 여러개니까 배열로
+        // @RequestPart("form의 name값") : 어떤 필드(form의 name값)에서 파일이 넘어오는지 알려주어야 함 = 라이크 @RequestParam("naem값")
+        // required = false : gid, location이 없는 경우 null값을 넣어주는 역할
 
         List<FileInfo> items = uploadService.upload(files, gid, location);
         HttpStatus status = HttpStatus.CREATED;

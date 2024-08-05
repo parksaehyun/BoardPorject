@@ -38,7 +38,7 @@ public class FileUploadService {
         // 1. 파일 정보 저장
         for (MultipartFile file : files) {
             String fileName = file.getOriginalFilename(); // 업로드한 파일의 실제 이름
-            String contentType = file.getContentType(); // 파일 형식
+            String contentType = file.getContentType(); // 파일 형식 -> 이거가지고 썸네일 만드는데 활용
             String extension = fileName.substring(fileName.lastIndexOf(".")); // ex) image.png -> 끝에서 잘라와서 파일 확장자 가져오기
 
             FileInfo fileInfo = FileInfo.builder()
@@ -49,7 +49,8 @@ public class FileUploadService {
                     .contentType(contentType)
                     .build();
 
-            fileInfoRepository.saveAndFlush(fileInfo); // 웹서버와 파일저장공간을 분리하는 경우가 많음 // 서버가 너무 부담스러워 해서
+            // 파일 정보 db에 저장
+            fileInfoRepository.saveAndFlush(fileInfo); // 서버가 너무 부담스러워 해서 웹서버와 파일저장공간을 분리하는 경우가 많음
 
 
             // 2. 파일을 서버로 이동

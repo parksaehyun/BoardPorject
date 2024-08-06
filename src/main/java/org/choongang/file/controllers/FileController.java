@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/file")
 @RequiredArgsConstructor
 public class FileController implements RestExceptionProcessor {
-    // RestExceptionProcessor : json형태로 에러 응답?
+    // RestExceptionProcessor : json형태로 에러 응답? 오류출력?
 
     private final FileUploadService uploadService;
     private final FileInfoService infoService;
@@ -36,8 +36,8 @@ public class FileController implements RestExceptionProcessor {
 
         List<FileInfo> items = uploadService.upload(files, gid, location);
         HttpStatus status = HttpStatus.CREATED;
-        JSONData data = new JSONData(items);
-        data.setStatus(status);
+        JSONData data = new JSONData(items); // JSONData형식으로 파일업로드리스트 담아주기
+        data.setStatus(status); // 파일업로드니까 응답코드 201로 바꿔줌
 
         return ResponseEntity.status(HttpStatus.CREATED).body(data);
     }

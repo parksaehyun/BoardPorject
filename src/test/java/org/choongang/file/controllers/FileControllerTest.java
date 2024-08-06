@@ -15,8 +15,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@ActiveProfiles("test")
-@AutoConfigureMockMvc
+@ActiveProfiles("test") // 테스트db
+@AutoConfigureMockMvc // 목mvc 세팅해주는 애노테이션
 public class FileControllerTest {
 
     @Autowired
@@ -34,12 +34,12 @@ public class FileControllerTest {
 
     @Test
     void uploadTest() throws Exception {
-        mockMvc.perform(multipart("/file/upload")
+        mockMvc.perform(multipart("/file/upload") // post방식이 아니라 multipart로
                 .file(file1)
                 .file(file2)
                 .param("gid", "testgid")
                 .param("location", "testlocation")
-                .with(csrf().asHeader())
+                .with(csrf().asHeader()) // 토큰
         ).andDo(print()).andExpect(status().isCreated());
     }
 }

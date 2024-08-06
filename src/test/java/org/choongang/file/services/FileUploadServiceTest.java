@@ -19,6 +19,7 @@ public class FileUploadServiceTest {
 
     @Test
     void uploadTest() {
+        // MockMultipartFile :
         MockMultipartFile file1 = new MockMultipartFile("file", "test1.png", "images/png", "ABC".getBytes());
         MockMultipartFile file2 = new MockMultipartFile("file", "test2.png", "images/png", "DEF".getBytes());
 

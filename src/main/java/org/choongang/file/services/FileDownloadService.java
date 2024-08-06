@@ -43,7 +43,7 @@ public class FileDownloadService {
 
             OutputStream out = response.getOutputStream();
             out.write(bis.readAllBytes());
-            // 헤더에 정의하고 // 바디에서 출력
+            // 응답헤더에 정의하고 // 바디에서 출력
 
             } catch (IOException e) {
             e.printStackTrace();

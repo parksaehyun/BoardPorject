@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 
 <main layout:fragment="content">
-
+    <form name="frmSave" method="POST">
+        <button type="button" class="fileUploads" data-gid="testgid" data-location="testlocation">이미지 업로드</button>
+    </form>
 </main>
-
 </html>
